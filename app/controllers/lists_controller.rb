@@ -8,8 +8,10 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     if @list.save
+      flash[:notice] = "投稿に成功しました。"
       redirect_to list_path(@list.id)
     else
+      flash.now[:alert] = "投稿に失敗しました。"
       render :new
     end
   end
@@ -21,12 +23,12 @@ class ListsController < ApplicationController
 
   def show
 
-    @list = List.find(params[:id])
+    @list= List.find(params[:id])
   end
 
   def edit
 
-      @list= List.find(params[:id])
+    @list= List.find(params[:id])
   end
 
   def update
